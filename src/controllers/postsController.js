@@ -1,0 +1,8 @@
+import getTodosPosts from "../models/postModels.js";
+
+export async function listarPosts(req, res) {
+    // Busca todos os posts usando a função getTodosPosts.
+    const posts = await getTodosPosts();
+    // Envia uma resposta HTTP com status 200 (OK) e os posts em formato JSON.
+    res.status(200).json(posts);
+}
