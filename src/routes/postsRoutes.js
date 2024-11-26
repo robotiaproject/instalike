@@ -3,7 +3,7 @@ import express from "express";
 // Importa o módulo Multer para lidar com o upload de arquivos.
 import multer from "multer";
 // Importa as funções controladoras para lidar com as requisições relacionadas a posts.
-import { listarPosts, postarNovoPost, uploadImagem } from "../controllers/postsController.js";
+import { listarPosts, postarNovoPost, uploadImagem, atualizarNovoPost } from "../controllers/postsController.js";
 
 // Configura o armazenamento de arquivos utilizando o Multer.
 const storage = multer.diskStorage({
@@ -30,6 +30,8 @@ const routes = (app) => {
   app.post("/posts", postarNovoPost);
   // Rota para fazer upload de uma imagem.
   app.post("/upload", upload.single("imagem"), uploadImagem);
+
+  app.put("/upload/:id", atualizarNovoPost);
 };
 
 // Exporta o módulo de rotas para ser utilizado em outras partes da aplicação.

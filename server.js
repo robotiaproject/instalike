@@ -5,6 +5,7 @@ import routes from "./src/routes/postsRoutes.js";
 
 // Cria uma instância do Express para iniciar o servidor.
 const app = express();
+app.use(express.static("uploads"))
 // Aplica as rotas definidas no arquivo routes.js à aplicação Express.
 routes(app)
 

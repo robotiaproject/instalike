@@ -1,5 +1,5 @@
 // Importa as funções para buscar e criar posts, e o módulo fs para manipulação de arquivos.
-import { getTodosPosts, criarPost } from "../models/postModels.js";
+import { getTodosPosts, criarPost, atualizarPost } from "../models/postModels.js";
 import fs from "fs";
 
 // Função assíncrona para listar todos os posts.
@@ -45,6 +45,26 @@ export async function uploadImagem(req, res) {
     res.status(200).json(postCriado);
   } catch (erro) {
     // Imprime a mensagem de erro no console e envia uma resposta HTTP com status 500 (Erro interno do servidor).
+    console.error(erro.message);
+    res.status(500).json({ "Erro": "Falha na requisição" });
+  }
+}
+
+
+export async function atualizarNovoPost(req, res) {
+  const id = req.params.id;
+  const urlImagem = `http://localhost:3000/${id}.png`
+  const post = {
+    imgUrl: urlImagem,
+    descricao: req.body.descricao,
+    alt: req.body.alt
+  }
+  try {
+    const postCriado = await atualizarPost(id, post);
+
+    res.status(200).json(postCriado);
+  } catch (erro) {
+
     console.error(erro.message);
     res.status(500).json({ "Erro": "Falha na requisição" });
   }
